@@ -20,12 +20,17 @@ done
 
 if [ -z "$FILEID" ]; then
    echo "Error: missing argument -i"
-   print_usage; exit; 
+   print_usage; exit 1; 
 fi
 
 if [ -z "$DEST" ]; then
    echo "Error: missing argument -d"
-   print_usage; exit; 
+   print_usage; exit 1; 
+fi
+
+if [ ! -f "$DEST" ]; then
+  echo "Error: -d flag expects a filename, but found directory! Please pass in a filename."
+  exit 1
 fi
 
 wget --load-cookies /tmp/cookies.txt \
